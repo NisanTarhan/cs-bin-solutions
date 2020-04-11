@@ -97,13 +97,15 @@ console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
 
 
 // Challenge 8
-const union = (arrays) => {
-
+const union = (...arrays) => {
+    const solutionOfUnionWithoutDuplicate = arrays.reduce((acc, curr) => {
+        return acc.length === 0 ? [...curr] : [...acc, ...curr.filter(item => !acc.includes(item))];
+    }, [])
+    return solutionOfUnionWithoutDuplicate;
 };
 
-// console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
-
 
 // Challenge 9
 const objOfMatches = (array1, array2, callback) => {
