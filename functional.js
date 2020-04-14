@@ -142,7 +142,16 @@ const multiMap = (arrVals, arrCallbacks) => {
 
 // Challenge 11
 const commutative = (func1, func2, value) => {
+    const functionArray = [func1, func2];
+    const resultOfFunctions = functionArray.reduce((acc, curr) => {
+        return curr(acc)
+    }, value)
 
+    const resultOfReversedFunctions = functionArray.reverse().reduce((acc, curr) => {
+        return curr(acc)
+    }, value)
+
+    return resultOfFunctions === resultOfReversedFunctions
 };
 
 // /*** Uncomment these to check your work! ***/
