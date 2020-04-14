@@ -188,7 +188,13 @@ const objFilter = (obj, callback) => {
 
 // Challenge 13
 const rating = (arrOfFuncs, value) => {
-
+    let countOfTrue = 0;
+    arrOfFuncs.forEach(func => {
+        if (func(value))
+            countOfTrue++;
+    })
+    const percantage = (countOfTrue / arrOfFuncs.length) * 100
+    return percantage;
 };
 
 // /*** Uncomment these to check your work! ***/
