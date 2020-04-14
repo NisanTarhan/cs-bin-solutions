@@ -15,7 +15,7 @@ const addTwo = (num) => {
 
 // Challenge 2
 const addS = (word) => {
-    return word + s;
+    return word + "s";
 };
 
 // Uncomment these to check your work
