@@ -209,7 +209,9 @@ const rating = (arrOfFuncs, value) => {
 
 // Challenge 14
 const pipe = (arrOfFuncs, value) => {
-
+    return arrOfFuncs.reduce((acc, curr) => {
+        return curr(acc);
+    }, value)
 };
 
 // /*** Uncomment these to check your work! ***/
