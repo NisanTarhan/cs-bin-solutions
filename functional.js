@@ -165,7 +165,16 @@ const commutative = (func1, func2, value) => {
 
 // Challenge 12
 const objFilter = (obj, callback) => {
+    const keys = Object.keys(obj)
+    const values = Object.values(obj);
+    const filteredObj = keys.reduce((acc, curr, i) => {
+        if (callback(curr) === values[i]) {
+            acc[curr] = values[i];
+        }
+        return acc;
+    }, {})
 
+    return filteredObj;
 };
 
 // /*** Uncomment these to check your work! ***/
