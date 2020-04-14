@@ -224,7 +224,21 @@ const pipe = (arrOfFuncs, value) => {
 
 // Challenge 15
 const highestFunc = (objOfFuncs, subject) => {
+    const funcNamePairWithResult = Object.entries(objOfFuncs).map(funcKeyPairs => {
+        let obj = {};
+        obj["key"] = funcKeyPairs[0]
+        obj["value"] = funcKeyPairs[1](subject)
+        return obj;
+    })
 
+    const maxValueOfFunctions = Math.max(
+        funcNamePairWithResult[0].value,
+        funcNamePairWithResult[1].value,
+        funcNamePairWithResult[2].value
+    )
+
+    const functionNameOfResult = funcNamePairWithResult.find(obj => obj.value === maxValueOfFunctions).key
+    return functionNameOfResult;
 };
 
 // /*** Uncomment these to check your work! ***/
