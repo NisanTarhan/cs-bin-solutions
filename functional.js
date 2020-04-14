@@ -125,8 +125,16 @@ const objOfMatches = (array1, array2, callback) => {
 
 // Challenge 10
 const multiMap = (arrVals, arrCallbacks) => {
+    const result = arrCallbacks.reduce((acc, curr, i) => {
+        let objectKey = arrVals[i]
+        if (objectKey) {
+            acc[arrVals[i]] = arrCallbacks.map(callback => callback(arrVals[i]))
+        }
+        return acc;
+    }, {});
 
-};
+    return result;
+}
 
 // console.log(multiMap(['catfood', 'glue', 'beer'], [(str) => str.toUpperCase(), (str) => str[0].toUpperCase() + str.slice(1).toLowerCase(), (str) => str + str]));
 // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
