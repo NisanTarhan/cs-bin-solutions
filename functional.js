@@ -109,7 +109,14 @@ console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 
 // Challenge 9
 const objOfMatches = (array1, array2, callback) => {
+    const matchedElement = array1.reduce((acc, curr, i) => {
+        if (callback(curr) === array2[i]) {
+            acc[curr] = array2[i];
+        }
+        return acc
+    }, {})
 
+    return matchedElement;
 };
 
 // console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], (str) => str.toUpperCase()));
