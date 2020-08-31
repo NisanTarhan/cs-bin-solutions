@@ -29,7 +29,7 @@ console.log(iterator());
 console.log(iterator());
 
 // CHALLENGE 2
-function createFlow(array) {
+function nextIterator(arr) {
     let i = 0
     const inner = {
         next: function () {
@@ -40,9 +40,10 @@ function createFlow(array) {
     }
     return inner;
 }
-const returnNextElement = createFlow([4, 5, 6])
-const element1 = returnNextElement.next()
-const element2 = returnNextElement.next()
 
-console.log(element1);
-console.log(element2);
+// Uncomment the lines below to test your work
+const array2 = [1, 2, 3];
+const iteratorWithNext = nextIterator(array2);
+console.log(iteratorWithNext.next()); // -> should log 1
+console.log(iteratorWithNext.next()); // -> should log 2
+console.log(iteratorWithNext.next()); // -> should log 3
