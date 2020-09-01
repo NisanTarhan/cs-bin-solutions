@@ -59,5 +59,25 @@ function sumArray(arr) {
 }
 
 // Uncomment the lines below to test your work
-const array4 = [1, 2, 3, 4];
-console.log(sumArray(array4)); // -> should log 10
+const array3 = [1, 2, 3, 4];
+console.log(sumArray(array3)); // -> should log 10
+
+// CHALLENGE 4
+
+function setIterator(set) {
+    let setIterator = set.values();
+    const iterator = {
+        next: () => {
+            let nextElement = setIterator.next();
+            return nextElement.value;
+        }
+    }
+    return iterator;
+}
+
+// Uncomment the lines below to test your work
+const mySet = new Set('hey');
+const iterateSet = setIterator(mySet);
+console.log(iterateSet.next()); // -> should log 'h'
+console.log(iterateSet.next()); // -> should log 'e'
+console.log(iterateSet.next()); // -> should log 'y'
