@@ -1,29 +1,29 @@
+// CHALLENGE 1
 function createFunction() {
     return () => console.log('Hello, world!');
 }
 
-// UNCOMMENT THESE TO TEST YOUR WORK!
-const function1 = createFunction();
-// function1();
+// /*** Uncomment these to check your work! ***/
+// const function1 = createFunction();
+// function1(); // => should console.log('hello');
 
 
-
+// CHALLENGE 2
 function createFunctionPrinter(input) {
-    let backpackForPrinter = input;
-    function print() {
-        console.log(backpackForPrinter);
-    }
-    return print;
+	function print(){
+    console.log(input)
+  }
+  return print;
 }
 
-// UNCOMMENT THESE TO TEST YOUR WORK!
-const printSample = createFunctionPrinter('sample');
-// printSample();
-const printHello = createFunctionPrinter('hello');
-// printHello();
+// /*** Uncomment these to check your work! ***/
+// const printSample = createFunctionPrinter('sample');
+// printSample(); // => should console.log('sample');
+// const printHello = createFunctionPrinter('hello');
+// printHello(); // => should console.log('hello');
 
 
-
+// CHALLENGE 3
 function outer() {
     let counter = 0; // this variable is outside incrementCounter's scope
     function incrementCounter() {
@@ -47,68 +47,72 @@ const jasCounter = outer();
 // willCounter(); //4
 
 
-
-function addByX(backpack) {
-    function add(num) {
-        return num + backpack;
-    }
-    return add;
+function addByX(x) {
+	function add(input) {
+    return input + x;
+  }
+  return add;
 }
 
+// /*** Uncomment these to check your work! ***/
 const addByTwo = addByX(2);
-const addByThree = addByX(3);
-// now call addByTwo with an input of 1
-// console.log(addByTwo(1)); 
+// addByTwo(1); // => should return 3
+// addByTwo(2); // => should return 4
+// addByTwo(3); // => should return 5
 
-// now call addByTwo with an input of 2
-// console.log(addByTwo(2)); 
+// const addByThree = addByX(3);
+// addByThree(1); // => should return 4
+// addByThree(2); // => should return 5
 
-//--------------------------------------------------
-// Extension
-//--------------------------------------------------
+// const addByFour = addByX(4);
+// addByFour(4); // => should return 8
+// addByFour(5); // => should return 9
 
-function once(cb) {
-    let cashedResult;
-    let hasBeenCalled = false;
 
-    function oncifiedCb(...args) {
-        if (!hasBeenCalled) {
-            cashedResult = cb(...args);;
-            hasBeenCalled = true;
-        }
-        return cashedResult
-    }
-    return oncifiedCb;
+// CHALLENGE 4
+function once(func) {
+  let previousResult;
+  return input => {
+    previousResult = previousResult || func(input);
+    return previousResult;
+  }
 }
 
-const onceFunc = once(addByTwo);
+// /*** Uncomment these to check your work! ***/
+//const onceFunc = once(addByTwo);
+//console.log(onceFunc(4));  // => should log 6
+//console.log(onceFunc(10));  // => should log 6
+//console.log(onceFunc(9001));  // => should log 6
 
-// UNCOMMENT THESE TO TEST YOUR WORK!
-// console.log(onceFunc(4));  //should log 6
-// console.log(onceFunc(10));  //should log 6
-// console.log(onceFunc(9001));  //should log 6
-
-
+// CHALLENGE 5
 function after(count, func) {
-    let called = 0;
-    return () => {
-        called >= count - 1 ? console.log("hello") : called++;
-    }
+  let executionCount = 0;
+	return () => {
+     executionCount === count-1 ? func() : executionCount++
+  }
 }
 
-const called = function () { console.log('hello') };
-const afterCalled = after(3, called);
+// /*** Uncomment these to check your work! ***/
+// const called = function() { console.log('hello') };
+// const afterCalled = after(3, called);
+// afterCalled(); // => nothing is printed
+// afterCalled(); // => nothing is printed
+// afterCalled(); // => 'hello' is printed
 
-// afterCalled(); // -> nothing is printed
-// afterCalled(); // -> nothing is printed
-// afterCalled(); // -> 'hello' is printed
 
-
-function delay(func, wait, ...args) {
-    setTimeout(() => func(...args), wait)
+// CHALLENGE 6
+function delay(func, wait) {
+	 function delayFunc(...args) {
+    setTimeout(() => func(args), wait)
+  }
+  return delayFunc;
 }
 
+const delayFunc = delay((input) => console.log(input), 3000);
+//delayFunc(1,2,3)
 
+
+// CHALLENGE 7
 function rollCall(names) {
     let index = 0;
     return () => {
@@ -121,10 +125,87 @@ function rollCall(names) {
     }
 }
 
-// UNCOMMENT THESE TO TEST YOUR WORK!
+// /*** Uncomment these to check your work! ***/
 const rollCaller = rollCall(['Victoria', 'Juan', 'Ruth'])
-// rollCaller() // -> Should log 'Victoria'
-// rollCaller() // -> Should log 'Juan'
-// rollCaller() // -> Should log 'Ruth'
-// rollCaller() // -> Should log 'Everyone accounted for'
+//rollCaller() // => should log 'Victoria'
+//rollCaller() // => should log 'Juan'
+//rollCaller() // => should log 'Ruth'
+//rollCaller() // => should log 'Everyone accounted for'
 
+
+// CHALLENGE 8
+function saveOutput(func, magicWord) {
+  const previousResult = {};
+	function passedFunction(input){
+    if(input === magicWord) return previousResult;
+    const result = func(input);
+    previousResult[input] = result;
+    return result;
+  }
+  return passedFunction;
+}
+
+// /*** Uncomment these to check your work! ***/
+// const multiplyBy2 = function(num) { return num * 2; };
+// const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
+// console.log(multBy2AndLog(2)); // => should log 4
+// console.log(multBy2AndLog(9)); // => should log 18
+// console.log(multBy2AndLog('boo')); // => should log { 2: 4, 9: 18 }
+
+
+
+// CHALLENGE 9
+function cycleIterator(array) {
+  let counter = 0;
+  const lastElementIndex = array.length-1;
+	function getDay() {
+    const currentDay = array[counter];
+    if(counter === lastElementIndex) {
+      counter = 0;
+    } else {
+      counter++;
+    }
+    return currentDay;
+  }
+  return getDay;
+}
+
+// /*** Uncomment these to check your work! ***/
+// const threeDayWeekend = ['Fri', 'Sat', 'Sun'];
+// const getDay = cycleIterator(threeDayWeekend);
+// console.log(getDay()); // => should log 'Fri'
+// console.log(getDay()); // => should log 'Sat'
+// console.log(getDay()); // => should log 'Sun'
+// console.log(getDay()); // => should log 'Fri'
+
+
+// CHALLENGE 10
+function defineFirstArg(func, arg) {
+  function passedInFunc(input){
+    return func(arg, input);
+  }
+	return passedInFunc;
+}
+
+// /*** Uncomment these to check your work! ***/
+// const subtract = function(big, small) { return big - small; };
+// const subFrom20 = defineFirstArg(subtract, 20);
+// console.log(subFrom20(5)); // => should log 15
+
+
+
+// CHALLENGE 11
+function dateStamp(func) {
+  const outputObj = {};
+	function passedInFunc(input){
+    outputObj.date = (new Date()).toString()
+    outputObj.output = func(input);
+    return outputObj;
+  }
+  return passedInFunc;
+}
+
+// /*** Uncomment these to check your work! ***/
+// const stampedMultBy2 = dateStamp(n => n * 2);
+// console.log(stampedMultBy2(4)); // => should log { date: (today's date), output: 8 }
+// console.log(stampedMultBy2(6)); // => should log { date: (today's date), output: 12 }
