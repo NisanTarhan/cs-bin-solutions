@@ -256,3 +256,60 @@ function callTimes() {
   }
   return incrementCounter;
 }
+
+
+// /*** Uncomment these to check your work! ***/
+// let myNewFunc1 = callTimes();
+// let myNewFunc2 = callTimes();
+// myNewFunc1(); // => 1
+// myNewFunc1(); // => 2
+// myNewFunc2(); // => 1
+// myNewFunc2(); // => 2
+
+
+// CHALLENGE 15
+function russianRoulette(num) {
+  const endOfGame = num - 1;
+  let counter = 0;
+	function reload(){
+    if(counter > endOfGame) return 'reload to play again'
+    const result =  counter === endOfGame ? "bang" : "click";
+    counter ++;
+    return result;
+  }
+  return reload;
+}
+
+// /*** Uncomment these to check your work! ***/
+// const play = russianRoulette(3);
+// console.log(play()); // => should log 'click'
+// console.log(play()); // => should log 'click'
+// console.log(play()); // => should log 'bang'
+// console.log(play()); // => should log 'reload to play again'
+// console.log(play()); // => should log 'reload to play again'
+
+
+// CHALLENGE 16
+function average() {
+	const numbers = [];
+  let avgOfNumbers;
+  function average(...args) {
+    const isFirstInputEmpty = numbers.length === 0 && args.length === 0;
+    if(isFirstInputEmpty) return 0;
+    if(args.length === 0) return avgOfNumbers;
+    numbers.push(args[0]);
+		const sumOfNumbers = numbers.reduce((acc, curr) => acc + curr, 0);
+    avgOfNumbers = sumOfNumbers / numbers.length;
+    return avgOfNumbers;
+  }
+  return average;
+}
+
+// /*** Uncomment these to check your work! ***/
+const avgSoFar = average();
+console.log(avgSoFar()); // => should log 0
+console.log(avgSoFar(4)); // => should log 4
+console.log(avgSoFar(8)); // => should log 6
+console.log(avgSoFar()); // => should log 6
+console.log(avgSoFar(12)); // => should log 8
+console.log(avgSoFar()); // => should log 8
