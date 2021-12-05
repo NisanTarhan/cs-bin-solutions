@@ -209,3 +209,50 @@ function dateStamp(func) {
 // const stampedMultBy2 = dateStamp(n => n * 2);
 // console.log(stampedMultBy2(4)); // => should log { date: (today's date), output: 8 }
 // console.log(stampedMultBy2(6)); // => should log { date: (today's date), output: 12 }
+
+
+// CHALLENGE 12
+function censor() {
+  const words = [];
+	function changeWord(targetWord, currentWord){
+    if(!currentWord){
+     const reducer = (sentence, word) => sentence.replace(word.target, word.current);
+     const newSentence = words.reduce(reducer, targetWord);
+     return newSentence;
+    }
+    const wordPairs = {target: targetWord, current: currentWord};
+    words.push(wordPairs);
+  }
+  return changeWord;
+}
+
+
+// CHALLENGE 13
+function createSecretHolder(secret) {
+  const secretHolder = {};
+  secretHolder.secret = secret;
+  secretHolder.getSecret = function(){
+    console.log(this.secret);
+  }
+  secretHolder.setSecret = function(secret){
+    this.secret = secret;
+  }
+  return secretHolder;
+}
+
+// /*** Uncomment these to check your work! ***/
+const obj = createSecretHolder(5)
+obj.getSecret() // => returns 5
+obj.setSecret(2)
+obj.getSecret() // => returns 2
+
+
+// CHALLENGE 14
+function callTimes() {
+	let counter = 0;
+  function incrementCounter(){
+    counter ++;
+    console.log(counter);
+  }
+  return incrementCounter;
+}
